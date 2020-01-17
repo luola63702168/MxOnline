@@ -70,7 +70,7 @@
                                     <ul class="video">
                                         {% for video in lession.get_lesson_video %}
                                             <li>
-                                                <a target="_blank" href='/video/3662'
+                                                <a target="_blank" href="{% url 'course:video_play' video.id %}"
                                                    class="J-media-item studyvideo">{{ video.name }}（{{ video.learn_times }}）
                                                     <i class="study-state"></i>
                                                 </a>
@@ -133,7 +133,7 @@
                                          style="display: block">
                                         <!-- img 200 x 112 -->
                                         <ul class="other-list">
-                                            {% for relate_course in relate_course %}
+                                            {% for relate_course in relate_courses %}
                                             <li class="curr">
                                                 <a href="{% url 'course:course_detail' relate_course.id %}" target="_blank">
                                                     <img src="{{MEDIA_URL}}{{ relate_course.image }}"

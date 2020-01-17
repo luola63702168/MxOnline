@@ -55,6 +55,7 @@ class Teacher(models.Model):
     points = models.CharField(max_length=50, verbose_name="教学特点")
     click_nums = models.IntegerField(default=0, verbose_name="点击数")
     image = models.ImageField(default='', upload_to="teacher/%Y/%m", verbose_name="头像", max_length=100)
+    age = models.IntegerField(default=18,verbose_name="年龄")
     fav_nums = models.IntegerField(default=0, verbose_name="收藏数")
     add_time = models.DateTimeField(default=datetime.now)
 
