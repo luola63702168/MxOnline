@@ -1,6 +1,6 @@
 import json
 
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout  # 验证账户密码
 from django.contrib.auth.backends import ModelBackend  # 改变authenticate验证模式
 from django.http import HttpResponse, HttpResponsePermanentRedirect
@@ -179,7 +179,9 @@ class LogoutView(View):
 
     def get(self, request):
         logout(request)
-        return HttpResponsePermanentRedirect(reverse('index'))
+        return redirect(reverse('index'))
+        # 永久重定向会生成一个登录缓存，下次访问这个url的时候不会访问这个视图，而是直接利用缓存重定向到主页。
+        # return HttpResponsePermanentRedirect(reverse('index'))
 
 
 class UploadImageView(LoginRequiredMixin, View):
@@ -208,6 +210,7 @@ class UploadImageView(LoginRequiredMixin, View):
 
 class UpdatePwdView(LoginRequiredMixin, View):
     """已登录修改密码（个人中心）"""
+
     def post(self, request):
         modify_form = ModifyPwdForm(request.POST)
         res = dict()
@@ -228,5 +231,42 @@ class UpdatePwdView(LoginRequiredMixin, View):
             res['msg'] = '密码修改成功'
         else:
             res = modify_form.errors
+
+        return HttpResponse(json.dumps(res), content_type='application/json')
+
+
+class SendEmailCodeView(LoginRequiredMixin, View):
+    """发送修改邮箱时的邮箱验证码"""
+
+    def get(self, request):
+        email = request.GET.get('email', '')
+        res = dict()
+        if UserProfile.objects.filter(email=email):
+            res['email'] = '邮箱已注册'
+            return HttpResponse(json.dumps(res), content_type='application/json')
+        send_register_email(email, 'update_email')
+        res['status'] = 'success'
+        res['msg'] = '发送验证码成功'
+        return HttpResponse(json.dumps(res), content_type='application/json')
+
+
+class UpdateEmailView(LoginRequiredMixin, View):
+    """修改个人邮箱"""
+
+    def post(self, request):
+        email = request.POST.get('email', '')
+        code = request.POST.get('code', '')
+
+        existed_records = EmailVerifyRecord.objects.filter(email=email, code=code, send_type='update_email')
+        res = dict()
+        if existed_records:
+            user = request.user
+            user.email = email
+            user.save()
+            res['status'] = 'success'
+            res['msg'] = '邮箱修改成功！'
+        else:
+            res['status'] = 'fail'
+            res['msg'] = '验证码出错！'
 
         return HttpResponse(json.dumps(res), content_type='application/json')

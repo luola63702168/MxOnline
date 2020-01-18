@@ -42,7 +42,7 @@
     <!--提示弹出框-->
     <div class="successbox dialogbox" id="jsSuccessTips">
         <h1>成功提交</h1>
-        <div class="close jsCloseDialog"><img src="../images/dig_close.png"/></div>
+        <div class="close jsCloseDialog"><img src="{% static 'images/dig_close.png' %}"/></div>
         <div class="cont">
             <h2>您的需求提交成功！</h2>
             <p></p>
@@ -133,7 +133,7 @@
                     <!--</form>-->
                 <!--</div>-->
                 <div class="tab-form">
-                    <form id="email_register_form" method="post" action="{% url 'register' %}" autocomplete="off">
+                    <form id="email_register_form" method="post" action="{% url 'users:register' %}" autocomplete="off">
                         {% csrf_token %}
                         <div class="form-group marb20 {% if register_form.errors.email %}errorput{% endif %}">
                             <label>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</label>

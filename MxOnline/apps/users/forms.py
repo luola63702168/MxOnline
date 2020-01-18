@@ -7,7 +7,7 @@ from users.models import UserProfile
 
 class LoginFrom(forms.Form):
     '''登录表单'''
-    username = forms.CharField(required=True)  # required=True 字段必须要有
+    username = forms.CharField(required=True)  # required=True 表示该字段必须要有
     password = forms.CharField(required=True, min_length=5)
 
 

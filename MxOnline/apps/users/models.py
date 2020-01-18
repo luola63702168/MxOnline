@@ -28,8 +28,8 @@ class EmailVerifyRecord(models.Model):
     '''邮箱模型类'''
     code = models.CharField(max_length=20, verbose_name="验证码")
     email = models.EmailField(max_length=50, verbose_name="邮箱")
-    send_type = models.CharField(choices=(("register", "注册"), ("forget", "找回密码")),verbose_name="验证码类型",
-                                 max_length=10)  # 邮箱验证码，不仅仅在注册的时候需要用，在找回密码的时候也是可以用的。
+    send_type = models.CharField(choices=(("register", "注册"), ("forget", "找回密码"),('update_email', '修改邮箱')),verbose_name="验证码类型",
+                                 max_length=18)  # 邮箱验证码，不仅仅在注册的时候需要用，在找回密码的时候也是可以用的。
     send_time = models.DateTimeField(default=datetime.now,verbose_name="发送时间")  # datetime.now 不能带括号，若不然就是编译时的时间
 
     def __str__(self):
