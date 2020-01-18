@@ -15,8 +15,10 @@ import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0,os.path.join(BASE_DIR,'apps'))
-sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))  # 如果使用pycharm的source root的话也是可以的，但是脱离pycharm就不行了，所以还是有必要添加这项的
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+
+# 如果将xadmin用于extra_apps文件夹时的注册项
+# sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))  # 如果使用pycharm的source root的话也是可以的，但是脱离pycharm就不行了，所以还是有必要添加这项的
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -28,7 +30,6 @@ SECRET_KEY = 'zg_!nlsh97)0@+$cxbh&ezy08vnl0cf(&p5wqqp8m89()zolmh'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -92,7 +93,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MxOnline.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -100,8 +100,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mxonline',
-        'USER':'root',
-        'PASSWORD':'123456',
+        'USER': 'root',
+        'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': 3306,
         'OPTIONS': {
@@ -111,7 +111,6 @@ DATABASES = {
 
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -131,7 +130,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -145,21 +143,20 @@ USE_L10N = True
 
 USE_TZ = False  # 时间存储为utc时间，所以要改为False，让时间变为本地时间
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'  # 当请求/static/时会去下面的这个目录寻找文件的
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,"static"),
+    os.path.join(BASE_DIR, "static"),
 )
 
 # 发送邮件的配置(sina)
 EMAIL_HOST = "smtp.sina.com"
 EMAIL_PORT = 25
-EMAIL_HOST_USER = "rusiwillbeok@sina.com" # 你的邮箱账号
-EMAIL_HOST_PASSWORD = "289ad05e0b1163c3" # 你的邮箱授权码
-EMAIL_USE_TLS = False # 这里是 False
+EMAIL_HOST_USER = "rusiwillbeok@sina.com"  # 你的邮箱账号
+EMAIL_HOST_PASSWORD = "289ad05e0b1163c3"  # 你的邮箱授权码
+EMAIL_USE_TLS = False  # 这里是 False
 EMAIL_FROM = "rusiwillbeok@sina.com"  # 你的邮箱账号
 
 # 配置上传文件的路径(如果不配置的话，直接上传到工程目录里了)

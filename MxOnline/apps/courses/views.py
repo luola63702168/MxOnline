@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.views.generic.base import View
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
+from django.db.models import Q
 
-from courses.models import Course, Lesson, CourseResource,Video
+from courses.models import Course, Lesson, CourseResource, Video
 from operation.models import UserFavorite, CourseComments, UserCourse
 from utils.mixin_utils import LoginRequiredMixin
 
@@ -17,6 +18,16 @@ class CourseListView(View):
     def get(self, request):
         all_courses = Course.objects.all().order_by("-add_time")
         hot_courses = Course.objects.all().order_by("-click_nums")[:3]
+
+        # 课程搜索
+        search_keywords = request.GET.get('keywords', '')
+        if search_keywords:
+            all_courses = all_courses.filter(
+                # __contains 类似sql的like语句，i 不区分大小写。
+                Q(name__icontains=search_keywords) |
+                Q(desc__icontains=search_keywords) |
+                Q(detail__icontains=search_keywords)
+            )
 
         # 课程排序
         sort = request.GET.get('sort', '')
@@ -143,6 +154,7 @@ class AddCommentsView(View):
 
 class VideoPlayView(LoginRequiredMixin, View):
     """视频播放"""
+
     def get(self, request, video_id):
         video = Video.objects.get(id=video_id)
         course = video.lesson.course
@@ -166,4 +178,3 @@ class VideoPlayView(LoginRequiredMixin, View):
             'relate_courses': relate_courses,
             'video': video,
         })
-

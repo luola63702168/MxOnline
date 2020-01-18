@@ -21,7 +21,7 @@ class UserAskForm(forms.ModelForm):
         model = UserAsk
         fields = ['name', 'mobile', 'course_name']
 
-    # 必须这样开头，当初始化的时候就会调用这个方法并对手机号进行验证
+    # 必须这样clean开头，当初始化的时候就会调用这个方法并对手机号进行验证
     def clean_mobile(self):
         '''校验手机号'''
         mobile = self.cleaned_data['mobile']  # 取出手机号

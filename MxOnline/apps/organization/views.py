@@ -8,6 +8,7 @@ from organization.models import CourseOrg, CityDict, Teacher
 from organization.forms import UserAskForm
 from operation.models import UserFavorite
 from courses.models import Course
+from utils.mixin_utils import LoginRequiredMixin
 
 
 # Create your views here.
@@ -22,6 +23,15 @@ class OrgView(View):
         # org_nums = all_orgs.count()
         # 城市
         all_citys = CityDict.objects.all()
+
+        # 机构搜索
+        search_keywords = request.GET.get('keywords', '')
+        if search_keywords:
+            all_orgs = all_orgs.filter(
+                Q(name__icontains=search_keywords) |
+                Q(desc__icontains=search_keywords)
+            )
+
         # 取出筛选城市
         city_id = request.GET.get('city', '')
         if city_id:
@@ -239,12 +249,13 @@ class TeacherDetailView(View):
         all_courses = Course.objects.filter(teacher=teacher)
 
         has_teacher_faved = False
-        if UserFavorite.objects.filter(user=request.user, fav_type=3, fav_id=teacher.id):
-            has_teacher_faved = True
-
         has_org_faved = False
-        if UserFavorite.objects.filter(user=request.user, fav_type=2, fav_id=teacher.org.id):
-            has_org_faved = True
+        if request.user.is_authenticated:
+            if UserFavorite.objects.filter(user=request.user, fav_type=3, fav_id=teacher.id):
+                has_teacher_faved = True
+
+            if UserFavorite.objects.filter(user=request.user, fav_type=2, fav_id=teacher.org.id):
+                has_org_faved = True
 
         return render(request, 'teacher-detail.html', {
             'teacher': teacher,
