@@ -150,7 +150,7 @@
             success: function (data) {
                 if (data.status == 'fail') {
                     if (data.msg == '用户未登录') {
-                        window.location.href = "{% url 'user:login' %}";
+                        window.location.href = "{% url 'users:login' %}";
                     } else {
                         current_elem.text(data.msg)
                     }

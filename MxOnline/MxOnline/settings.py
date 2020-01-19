@@ -31,6 +31,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
+# '*' 代表所有客户端都可以链接
+# DEBUG = False
+# ALLOWED_HOSTS = ['*']
+
 # Application definition
 
 # 改变登录验证过程
@@ -162,6 +167,11 @@ EMAIL_FROM = "rusiwillbeok@sina.com"  # 你的邮箱账号
 # 配置上传文件的路径(如果不配置的话，直接上传到工程目录里了)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# 生产环境nginx会代理静态文件，此时没有部署，所以要自己定义路由，
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 # 发送邮件的配置(163)
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

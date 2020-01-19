@@ -1,6 +1,6 @@
 import json
 
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout  # 验证账户密码
 from django.contrib.auth.backends import ModelBackend  # 改变authenticate验证模式
 from django.http import HttpResponse, HttpResponsePermanentRedirect
@@ -8,9 +8,13 @@ from django.urls import reverse
 from django.db.models import Q
 from django.views.generic.base import View
 from django.contrib.auth.hashers import make_password  # 加密密码
+from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
-from users.models import UserProfile, EmailVerifyRecord
-from users.forms import LoginFrom, RegisterForm, ForgetForm, ModifyPwdForm, UploadImageForm
+from users.models import UserProfile, EmailVerifyRecord,Banner
+from operation.models import UserCourse, UserFavorite, UserMessage
+from courses.models import CourseOrg, Course
+from organization.models import Teacher
+from users.forms import LoginFrom, RegisterForm, ForgetForm, ModifyPwdForm, UploadImageForm, UserInfoForm
 from utils.email_send import send_register_email
 from utils.mixin_utils import LoginRequiredMixin
 
@@ -45,7 +49,7 @@ class LoginView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return render(request, 'index.html', {})
+                    return redirect(reverse('index'))
                 else:
                     return render(request, 'login.html', {"msg": "用户名未激活"})
             else:
@@ -75,6 +79,11 @@ class RegisterView(View):
             user_profile.is_active = False
             user_profile.password = make_password(pass_word)
             user_profile.save()
+
+            user_message = UserMessage()
+            user_message.user = user_profile.id
+            user_message.message = '欢迎注册慕学在线网'
+            user_message.save()
             send_register_email(user_name, "register")
 
             return render(request, 'login.html')
@@ -159,19 +168,19 @@ class UserInfoView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, 'usercenter-info.html')
 
-    # 用户修改昵称，手机号，地址，生日
-    # def post(self, request):
-    #     user_info_form = UserInfoForm(request.POST, instance=request.user)
-    #     res = dict()
-    #
-    #     if user_info_form.is_valid():
-    #         user_info_form.save()
-    #         res['status'] = 'success'
-    #
-    #     else:
-    #         res = user_info_form.errors
-    #
-    #     return HttpResponse(json.dumps(res), content_type='application/json')
+    # 修该（只有传入 instance=request.user的时候才是修改，要不然就是）
+    def post(self, request):
+        user_info_form = UserInfoForm(request.POST, instance=request.user)
+        res = dict()
+
+        if user_info_form.is_valid():
+            user_info_form.save()
+            res['status'] = 'success'
+
+        else:
+            res = user_info_form.errors
+
+        return HttpResponse(json.dumps(res), content_type='application/json')
 
 
 class LogoutView(View):
@@ -190,7 +199,7 @@ class UploadImageView(LoginRequiredMixin, View):
     def post(self, request):
         # image_form = UploadImageForm(request.POST, request.FILES)
         # if image_form.is_valid():
-        #     # 取出image文件对象
+        #     # 取出image文件对象(只要是通过验证的字段都会在 cleaned_data 中 )
         #     image = image_form.cleaned_data['image']
         #     request.user.image = image
         #     request.user.save()
@@ -270,3 +279,115 @@ class UpdateEmailView(LoginRequiredMixin, View):
             res['msg'] = '验证码出错！'
 
         return HttpResponse(json.dumps(res), content_type='application/json')
+
+
+class MyCourseView(LoginRequiredMixin, View):
+    """我的课程"""
+
+    def get(self, request):
+        user_courses = UserCourse.objects.filter(user=request.user)
+        return render(request, 'usercenter-mycourse.html', {
+            'user_courses': user_courses,
+        })
+
+
+class MyFavOrgView(LoginRequiredMixin, View):
+    """我收藏的课程机构"""
+
+    def get(self, request):
+        org_list = []
+        fav_orgs = UserFavorite.objects.filter(user=request.user, fav_type=2)
+        for fav_org in fav_orgs:
+            org_id = fav_org.fav_id
+            org = CourseOrg.objects.get(id=org_id)
+            org_list.append(org)
+        return render(request, 'usercenter-fav-org.html', {
+            'org_list': org_list,
+        })
+
+
+class MyFavTeacherView(LoginRequiredMixin, View):
+    """我收藏的授课讲师"""
+
+    def get(self, request):
+        teacher_list = []
+        fav_teachers = UserFavorite.objects.filter(user=request.user, fav_type=3)
+        for fav_teacher in fav_teachers:
+            teacher_id = fav_teacher.fav_id
+            teacher = Teacher.objects.get(id=teacher_id)
+            teacher_list.append(teacher)
+        return render(request, 'usercenter-fav-teacher.html', {
+            'teacher_list': teacher_list,
+        })
+
+
+class MyFavCourseView(LoginRequiredMixin, View):
+    """我收藏的课程"""
+
+    def get(self, request):
+        course_list = []
+        fav_courses = UserFavorite.objects.filter(user=request.user, fav_type=1)
+        for fav_course in fav_courses:
+            course_id = fav_course.fav_id
+            course = Course.objects.get(id=course_id)
+            course_list.append(course)
+        return render(request, 'usercenter-fav-course.html', {
+            'course_list': course_list,
+        })
+
+
+class MyMessageView(LoginRequiredMixin, View):
+    """我的消息"""
+
+    def get(self, request):
+        # todo 如果 user = 0 ，代表全局消息，所有用户都能收到
+        all_message = UserMessage.objects.filter(user=request.user.id)
+        # 清空未读状态
+        all_unread_message = UserMessage.objects.filter(user=request.user.id, has_read=False)
+        for unread_message in all_unread_message:
+            unread_message.has_read = True
+            unread_message.save()
+        # 分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+        p = Paginator(all_message, 2, request=request)
+        messages = p.page(page)
+        return render(request, 'usercenter-message.html', {
+            'messages': messages,
+        })
+
+
+# 慕学在线网首页
+class IndexView(View):
+    def get(self, request):
+        # 取出轮播图
+        all_banners = Banner.objects.all().order_by('index')
+        courses = Course.objects.filter(is_banner=False)[:6]
+        banner_courses = Course.objects.filter(is_banner=True)[:3]
+        course_orgs = CourseOrg.objects.all()[:15]
+        return render(request, 'index.html', {
+            'all_banners': all_banners,
+            'courses': courses,
+            'banner_courses': banner_courses,
+            'course_orgs': course_orgs,
+        })
+
+
+def page_not_found(request):
+    """404"""
+    from django.shortcuts import render_to_response
+    response = render_to_response('404.html', {})
+    response.status_code = 404
+    return response
+
+
+def page_error(request):
+    """500"""
+    from django.shortcuts import render_to_response
+    response = render_to_response('500.html', {})
+    response.status_code = 500
+    return response
+
+

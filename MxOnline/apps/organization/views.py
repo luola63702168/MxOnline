@@ -88,6 +88,8 @@ class OrgHomeView(View):
     def get(self, request, org_id):
         current_page = "home"
         course_org = CourseOrg.objects.get(id=int(org_id))
+        course_org.click_nums += 1
+        course_org.save()
 
         has_fav = False
         if request.user.is_authenticated:
@@ -173,6 +175,26 @@ class AddFavView(View):
     用户收藏，及取消收藏
     '''
 
+    def set_fav_nums(self, fav_type, fav_id, num=1):
+        if fav_type == 1:
+            course = Course.objects.get(id=fav_id)
+            course.fav_nums += num
+            if course.fav_nums < 0:
+                course.fav_nums = 0
+            course.save()
+        elif fav_type == 2:
+            course_org = CourseOrg.objects.get(id=fav_id)
+            course_org.fav_nums += num
+            if course_org.fav_nums < 0:
+                course_org.fav_nums = 0
+            course_org.save()
+        elif fav_type == 3:
+            teacher = Teacher.objects.get(id=fav_id)
+            teacher.fav_nums += num
+            if teacher.fav_nums < 0:
+                teacher.fav_nums = 0
+            teacher.save()
+
     def post(self, request):
         # print(type(request.POST.get('fav_id', 0)),"*"*100)
         try:
@@ -190,6 +212,7 @@ class AddFavView(View):
         if exist_records:
             # 用户想取消收藏了
             exist_records.delete()
+            self.set_fav_nums(fav_type, fav_id, -1)
             return HttpResponse('{"status":"success","msg":"收藏"}', content_type='application/json')
         else:
             user_fav = UserFavorite()
@@ -198,6 +221,7 @@ class AddFavView(View):
                 user_fav.fav_id = fav_id
                 user_fav.fav_type = fav_type
                 user_fav.save()
+                self.set_fav_nums(fav_type, fav_id, 1)
                 return HttpResponse('{"status":"success","msg":"已收藏"}', content_type='application/json')
             else:
                 return HttpResponse('{"status":"fail","msg":"收藏出错"}', content_type='application/json')

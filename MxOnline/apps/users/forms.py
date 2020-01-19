@@ -38,3 +38,13 @@ class UploadImageForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['image']
+
+
+class UserInfoForm(forms.ModelForm):
+    """用户个人信息页(保存)"""
+    class Meta:
+        model = UserProfile
+        fields = ['nick_name', 'gender', 'birday', 'address', 'mobile']
+
+
+# ModelForm 和 Form的区别，前者只可以校验，后者不仅可以校验，还可以修改。
