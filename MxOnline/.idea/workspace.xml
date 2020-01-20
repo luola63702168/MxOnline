@@ -2,30 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c710b956-f7a8-4561-bb5a-125546f63bd2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/courses/migrations/0010_course_is_banner.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/organization/migrations/0006_courseorg_tag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MxOnline/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/MxOnline/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MxOnline/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/MxOnline/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/courses/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/courses/adminx.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/courses/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/courses/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/courses/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/courses/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/organization/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/organization/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/organization/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/organization/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/course-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/course-detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/course-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/course-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/forgetpwd.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forgetpwd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/org-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/org-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/org_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/org_base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/teacher-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/teacher-detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/usercenter-base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/usercenter-base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/usercenter-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/usercenter-info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/organization/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/organization/adminx.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +47,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -75,11 +56,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\GIT_space\MxOnline\MxOnline" />
       <recent name="E:\GIT_space\MxOnline\MxOnline\templates" />
       <recent name="E:\py3_file\Django_project\MxOnline\templates" />
       <recent name="E:\py3rizhi\Django_project\MxOnline\templates" />
       <recent name="E:\py3rizhi\Django_project\MxOnline\static" />
-      <recent name="E:\py3rizhi\Django_project\MxOnline" />
     </key>
   </component>
   <component name="RunManager" selected="Django server.MxOnline">
@@ -206,7 +187,9 @@
       <workItem from="1579266134600" duration="7502000" />
       <workItem from="1579330578393" duration="4600000" />
       <workItem from="1579337475805" duration="25959000" />
-      <workItem from="1579429085649" duration="14852000" />
+      <workItem from="1579429085649" duration="15737000" />
+      <workItem from="1579502960356" duration="1754000" />
+      <workItem from="1579506539024" duration="8239000" />
     </task>
     <servers />
   </component>
@@ -271,19 +254,19 @@
       <screen x="3840" y="0" width="2560" height="1440" />
     </state>
     <state x="4552" y="422" key="SettingsEditor/0.0.1920.1080/3840.0.2560.1440@3840.0.2560.1440" timestamp="1579244875934" />
-    <state x="4585" y="655" key="com.intellij.ide.util.TipDialog" timestamp="1579429100000">
+    <state x="4585" y="655" key="com.intellij.ide.util.TipDialog" timestamp="1579506549159">
       <screen x="3840" y="0" width="2560" height="1440" />
     </state>
-    <state x="559" y="491" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/3840.0.2560.1440@0.0.1920.1080" timestamp="1579330579647" />
-    <state x="4585" y="655" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/3840.0.2560.1440@3840.0.2560.1440" timestamp="1579429100000" />
+    <state x="559" y="491" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/3840.0.2560.1440@0.0.1920.1080" timestamp="1579502991198" />
+    <state x="4585" y="655" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/3840.0.2560.1440@3840.0.2560.1440" timestamp="1579506549159" />
     <state x="4872" y="219" width="607" height="804" key="find.popup" timestamp="1579445115354">
       <screen x="3840" y="0" width="2560" height="1440" />
     </state>
     <state x="4872" y="219" width="607" height="804" key="find.popup/0.0.1920.1080/3840.0.2560.1440@3840.0.2560.1440" timestamp="1579445115354" />
-    <state x="4639" y="274" width="672" height="678" key="search.everywhere.popup" timestamp="1579444690117">
+    <state x="4639" y="274" width="672" height="678" key="search.everywhere.popup" timestamp="1579511172850">
       <screen x="3840" y="0" width="2560" height="1440" />
     </state>
-    <state x="4639" y="274" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/3840.0.2560.1440@3840.0.2560.1440" timestamp="1579444690117" />
+    <state x="4639" y="274" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080/3840.0.2560.1440@3840.0.2560.1440" timestamp="1579511172850" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MxOnline$views.coverage" NAME="views Coverage Results" MODIFIED="1579364373780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/apps/users" />

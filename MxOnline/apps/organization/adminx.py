@@ -13,6 +13,7 @@ class CourseOrgAdmin(object):
     list_display = ['name', 'desc', 'click_nums', 'fav_nums']
     search_fields = ['name', 'desc', 'click_nums', 'fav_nums']
     list_filter = ['name', 'desc', 'click_nums', 'fav_nums']
+    # relfield_style = 'fk-ajax'  # 课程的一个外键指向了机构，该外键便会在课程中以ajax形式加载（并不会页面载入就会全部加载数据），并实现检索功能
 
 
 class TeacherAdmin(object):
