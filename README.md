@@ -42,6 +42,15 @@
     - xadmin
     - 后台功能完善
     - 且需要定制部分插件  
+- others
+    - 404 500 页面定制 
 ### 项目展示
 ![image](https://github.com/luola63702168/MxOnline/blob/master/obj_images/index.png)
+![image](https://github.com/luola63702168/MxOnline/blob/master/obj_images/login.png)
+![image](https://github.com/luola63702168/MxOnline/blob/master/obj_images/register.png)
+![image](https://github.com/luola63702168/MxOnline/blob/master/obj_images/user.png)
+![image](https://github.com/luola63702168/MxOnline/blob/master/obj_images/course.png)
+![image](https://github.com/luola63702168/MxOnline/blob/master/obj_images/consultation.png)
+![image](https://github.com/luola63702168/MxOnline/blob/master/obj_images/collection.png)
+![image](https://github.com/luola63702168/MxOnline/blob/master/obj_images/backstage.png)
 
