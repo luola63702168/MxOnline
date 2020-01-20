@@ -22,7 +22,6 @@ from django.views.static import serve  # 处理上传文件的访问
 from MxOnline.settings import MEDIA_ROOT
 from users.views import IndexView
 
-
 urlpatterns = [
     # path('xadmin/', xadmin.site.urls)
     url(r'xadmin/', xadmin.site.urls),  # xadmin后台管理
@@ -51,4 +50,3 @@ urlpatterns = [
 # 全局 404 页面配置
 handler404 = 'users.views.page_not_found'
 handler500 = 'users.views.page_error'
-

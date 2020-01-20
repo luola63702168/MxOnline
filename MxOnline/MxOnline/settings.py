@@ -17,8 +17,7 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
-# 如果将xadmin用于extra_apps文件夹时的注册项
-# sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))  # 如果使用pycharm的source root的话也是可以的，但是脱离pycharm就不行了，所以还是有必要添加这项的
+# sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -31,9 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# 关闭debug模式
 # DEBUG = False
-# ALLOWED_HOSTS = ['*']  # '*' 代表所有客户端都可以链接
+# ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -55,7 +53,7 @@ INSTALLED_APPS = [
     'operation',
     'utils',
 
-    'xadmin',  # 下面两项都是xadmin的注册
+    'xadmin',  # xadmin
     'crispy_forms',
 
     'captcha',  # 验证码
@@ -145,12 +143,12 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False  # 时间存储为utc时间，所以要改为False，让时间变为本地时间
+USE_TZ = False  # 本地时间
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'  # 当请求/static/时会去下面的这个目录寻找文件的
+STATIC_URL = '/static/'  # static
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
@@ -163,11 +161,11 @@ EMAIL_HOST_PASSWORD = "289ad05e0b1163c3"  # 你的邮箱授权码
 EMAIL_USE_TLS = False  # 这里是 False
 EMAIL_FROM = "rusiwillbeok@sina.com"  # 你的邮箱账号
 
-# 配置上传文件的路径(如果不配置的话，直接上传到工程目录里了)
+# MEDIA_URL
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# 生产环境nginx会代理静态文件，此时没有部署，所以要自己定义路由，
+# 生产环境,且无nginx
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 

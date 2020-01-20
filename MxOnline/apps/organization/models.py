@@ -8,7 +8,7 @@ from datetime import datetime
 class CityDict(models.Model):
     '''城市模型类'''
     name = models.CharField(max_length=20, verbose_name="城市")
-    desc = models.CharField(max_length=200, verbose_name="描述")  # 可以不展示，我们在设计数据库的时候尽量设置多一点
+    desc = models.CharField(max_length=200, verbose_name="描述")  # 利于数据分析
     add_time = models.DateTimeField(default=datetime.now)
 
     def __str__(self):

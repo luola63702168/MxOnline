@@ -41,11 +41,11 @@ class LoginView(View):
         return render(request, "login.html", {})
 
     def post(self, request):
-        login_form = LoginFrom(request.POST)  # 会把POST中对应字段的数据进行校验，所以html中name对应的value要和类中属性名一致。
-        if login_form.is_valid():  # 成功就说明数据校验合格
+        login_form = LoginFrom(request.POST)
+        if login_form.is_valid():
             user_name = request.POST.get("username", "")
             pass_word = request.POST.get("password", "")
-            user = authenticate(username=user_name, password=pass_word)  # 查看源码发现参数没有默认名的，是需要自己指定的
+            user = authenticate(username=user_name, password=pass_word)
             if user is not None:
                 if user.is_active:
                     login(request, user)
@@ -55,14 +55,14 @@ class LoginView(View):
             else:
                 return render(request, 'login.html', {"msg": "用户名或密码错误"})
         else:
-            return render(request, 'login.html', {"login_form": login_form})  # login_form 是一个字典，包含了谁错了和错误提示
+            return render(request, 'login.html', {"login_form": login_form})
 
 
 class RegisterView(View):
     '''注册'''
 
     def get(self, request):
-        register_form = RegisterForm()  # 这里是为了存储上一次提交表单的信息，让 register_form 自动的帮我们填在input的value中
+        register_form = RegisterForm()
         return render(request, "register.html", {'register_form': register_form})
 
     def post(self, request):
@@ -95,8 +95,7 @@ class ActivateUserView(View):
     '''邮箱激活'''
 
     def get(self, request, activate_code):
-        # 这种生成随机字符串的方法，在数据库中有可能会存在一样的，所以需要将所有的都查出来；
-        # 其实用from itsdangerous import TimedJSONWebSignatureSerializer as Serializer，可能会更好。
+        # todo 其实用from itsdangerous import TimedJSONWebSignatureSerializer as Serializer，可能会更好。
         all_records = EmailVerifyRecord.objects.filter(code=activate_code)
         if all_records:
             for record in all_records:
@@ -154,7 +153,7 @@ class ModifyPwdView(View):
             user = UserProfile.objects.get(email=email)
             user.password = make_password(pwd2)
             user.save()
-            # 这里其实可以给EmailVerifyRecord模型类添加一个bool字段，来使用户重置密码后使链接失效
+            # todo 这里其实可以给EmailVerifyRecord模型类添加一个bool字段，来使用户重置密码后使链接失效
             # 也可以在给链接设置随机字符串的时候使用之有过期时间
             return render(request, 'login.html')
         else:
@@ -168,7 +167,6 @@ class UserInfoView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, 'usercenter-info.html')
 
-    # 修该（只有传入 instance=request.user的时候才是修改，要不然就是）
     def post(self, request):
         user_info_form = UserInfoForm(request.POST, instance=request.user)
         res = dict()
@@ -189,8 +187,7 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect(reverse('index'))
-        # 永久重定向会生成一个登录缓存，下次访问这个url的时候不会访问这个视图，而是直接利用缓存重定向到主页。
-        # return HttpResponsePermanentRedirect(reverse('index'))
+
 
 
 class UploadImageView(LoginRequiredMixin, View):
@@ -199,12 +196,10 @@ class UploadImageView(LoginRequiredMixin, View):
     def post(self, request):
         # image_form = UploadImageForm(request.POST, request.FILES)
         # if image_form.is_valid():
-        #     # 取出image文件对象(只要是通过验证的字段都会在 cleaned_data 中 )
         #     image = image_form.cleaned_data['image']
         #     request.user.image = image
         #     request.user.save()
 
-        # request.FILES 是文件传输时的特殊的存在，instance：代表此form是谁的form
         image_form = UploadImageForm(request.POST, request.FILES, instance=request.user)
         res = dict()
         if image_form.is_valid():
@@ -340,7 +335,7 @@ class MyMessageView(LoginRequiredMixin, View):
     """我的消息"""
 
     def get(self, request):
-        # todo 如果 user = 0 ，代表全局消息，所有用户都能收到
+        # todo 如果 user = 0 ，代表全局消息，所有用户都能收到（未做）
         all_message = UserMessage.objects.filter(user=request.user.id)
         # 清空未读状态
         all_unread_message = UserMessage.objects.filter(user=request.user.id, has_read=False)
@@ -362,7 +357,6 @@ class MyMessageView(LoginRequiredMixin, View):
 # 慕学在线网首页
 class IndexView(View):
     def get(self, request):
-        # 取出轮播图
         all_banners = Banner.objects.all().order_by('index')
         courses = Course.objects.filter(is_banner=False)[:6]
         banner_courses = Course.objects.filter(is_banner=True)[:3]

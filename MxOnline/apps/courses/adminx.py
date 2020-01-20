@@ -18,29 +18,26 @@ class CourseResourceInline(object):
 
 class CourseAdmin(object):
     list_display = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums', 'image', 'click_nums',
-                    'add_time', 'get_zj_nums', 'go_to']  # 显示字段(函数也行)
-    search_fields = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums', 'click_nums']  # 搜索字段
+                    'add_time', 'get_zj_nums', 'go_to']
+    search_fields = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums', 'click_nums']
     list_filter = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums', 'image', 'click_nums',
-                   'add_time']  # 筛选字段
-    # ordering = ['-click_nums'] # 配置该字段默认倒序排列
-    # readonly_fields = ['click_nums']  # 配置该字段不可后台修改
-    # exclude = ['fav_nums'] # 设置该字段后台不显示
-    list_editable = ['degree', 'desc']  # 实现该字段可在列表页直接编辑
-    inlines = [LessonInline, CourseResourceInline]  # 实现两个模型类可在一个模型类中进行添加操作
-    refresh_times = [3, 5]  # 后台生成刷新图标，代表几秒刷新一次
+                   'add_time']
+    # ordering = ['-click_nums']
+    # readonly_fields = ['click_nums']
+    # exclude = ['fav_nums']
+    list_editable = ['degree', 'desc']
+    inlines = [LessonInline, CourseResourceInline]
+    refresh_times = [3, 5]
 
     def queryset(self):
         """重载方法实现数据过滤"""
         qs = super(CourseAdmin, self).queryset()
-        qs = qs.filter(is_banner=False)  # 此时该管理类只会管理is_banner这个字段 = False
+        qs = qs.filter(is_banner=False)
         return qs
 
     def save_models(self):
-        """重载做save时调用的方法
-        实现添加课程的时候，课程机构统计的课程数量重新统计一次
-        （这样即使是删除也会在下一次保存的时候更新其数量）
+        """重载做save时调用的方法，完成course更新course_nums统计
         """
-        # 拿到被保存的这个对象的实例
         obj = self.new_obj
         obj.save()
         if obj.course_org:
@@ -51,10 +48,10 @@ class CourseAdmin(object):
 
 class BannerCourseAdmin(object):
     list_display = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums', 'image', 'click_nums',
-                    'add_time']  # 显示字段
-    search_fields = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums', 'click_nums']  # 搜索字段
+                    'add_time']
+    search_fields = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums', 'click_nums']
     list_filter = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums', 'image', 'click_nums',
-                   'add_time']  # 筛选字段
+                   'add_time']
     # ordering = ['-click_nums'] # 配置该字段默认倒序排列
     # readonly_fields = ['click_nums']  # 配置该字段不可后台修改
     # exclude = ['fav_nums'] # 设置该字段后台不显示
@@ -63,14 +60,14 @@ class BannerCourseAdmin(object):
     def queryset(self):
         """实现数据过滤"""
         qs = super(BannerCourseAdmin, self).queryset()
-        qs = qs.filter(is_banner=True)  # 此时该管理类只会管理is_banner这个字段=True的数据
+        qs = qs.filter(is_banner=True)
         return qs
 
 
 class LessonAdmin(object):
-    list_display = ['course', 'name', 'add_time']  # 第一列是修改该条数据的快速入口
+    list_display = ['course', 'name', 'add_time']
     search_fields = ['course', 'name']
-    list_filter = ['course__name', 'name', 'add_time']  # course__name 使过滤器可通过外键过滤
+    list_filter = ['course__name', 'name', 'add_time']
 
 
 class VideoAdmin(object):

@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 
 from users.views import LoginView, RegisterView, ActivateUserView, ForgetPwdView, ResetView, ModifyPwdView, \
     UserInfoView, LogoutView, UploadImageView, UpdatePwdView, SendEmailCodeView, UpdateEmailView, MyCourseView, \
-    MyFavOrgView, MyFavTeacherView, MyFavCourseView,MyMessageView
+    MyFavOrgView, MyFavTeacherView, MyFavCourseView, MyMessageView
 
 urlpatterns = [
     url(r'^login/$', LoginView.as_view(), name="login"),  # 登录 # 根目录匹配的时候是不需要“/”的所以要把/login/的“/”去掉

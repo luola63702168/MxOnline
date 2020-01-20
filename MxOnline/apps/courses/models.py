@@ -34,14 +34,12 @@ class Course(models.Model):
     def get_zj_nums(self):
         '''取章节数'''
         return self.lesson_set.all().count()
-        # 下面这种情况，取得是所有得章节数，而不是该对象得章节数，当然，也可以在view.py中进行关联查询并返回，这里怎样顺手怎样来
         # return Lesson.objects.all().count()
 
-    # 给这个函数变量添加一个变量，后台便会显示其相对 verbose_name 的名字了
     get_zj_nums.short_description = "章节数"
 
     def go_to(self):
-        # 不允许转义，以链接的形式展示
+        """不转义，以链接的形式跳转"""
         from django.utils.safestring import mark_safe
         return mark_safe("<a href='https://www.baidu.com/'>跳转</a>")
 
@@ -66,13 +64,12 @@ class BannerCourse(Course):
     class Meta:
         verbose_name = "轮播课程"
         verbose_name_plural = verbose_name
-        # 如果不设置 proxy ，就会再生成一个 BannerCourse 数据表
         proxy = True
 
 
 class Lesson(models.Model):
     '''章节模型类'''
-    course = models.ForeignKey(Course, verbose_name="课程", on_delete=models.CASCADE)  # django2新特性，删除主表时从表的数据一起删除
+    course = models.ForeignKey(Course, verbose_name="课程", on_delete=models.CASCADE)
     name = models.CharField(max_length=100, verbose_name="章节名")
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
@@ -106,7 +103,7 @@ class Video(models.Model):
 
 class CourseResource(models.Model):
     '''课程资源'''
-    course = models.ForeignKey(Course, verbose_name="课程", on_delete=models.CASCADE)  # django2新特性，删除主表时从表的数据一起删除
+    course = models.ForeignKey(Course, verbose_name="课程", on_delete=models.CASCADE)
     download = models.FileField(upload_to="course/resource/%Y/%m", verbose_name="资源文件", max_length=100)
     name = models.CharField(max_length=100, verbose_name="名称")
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")

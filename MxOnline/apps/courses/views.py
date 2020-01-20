@@ -23,7 +23,6 @@ class CourseListView(View):
         search_keywords = request.GET.get('keywords', '')
         if search_keywords:
             all_courses = all_courses.filter(
-                # __contains 类似sql的like语句，i 不区分大小写。
                 Q(name__icontains=search_keywords) |
                 Q(desc__icontains=search_keywords) |
                 Q(detail__icontains=search_keywords)
@@ -61,12 +60,8 @@ class CourseDetailView(View):
         course_id = int(course_id)
         course = Course.objects.get(id=course_id)
 
-        # 访问一次代表点击一次，增加点击数
         course.click_nums += 1
         course.save()
-        # 在models中定义获取, 和下面这种获取自选其一即可
-        # course_zj_num = Lesson.objects.filter(course__id=course_id).all().count()
-        # print(course_zj_num)
 
         has_fav_course = False
         has_fav_org = False
@@ -97,7 +92,6 @@ class CourseInfoView(LoginRequiredMixin, View):
         course = Course.objects.get(id=course_id)
         course.students += 1
         course.save()
-        # 查询用户是否已经关联了该课程(点击开始学习后，将该课程与该用户进行关联)
         user_course = UserCourse.objects.filter(user=request.user, course=course)
         if not user_course:
             user_course = UserCourse(user=request.user, course=course)
@@ -107,9 +101,7 @@ class CourseInfoView(LoginRequiredMixin, View):
         user_ids = [user_course.user.id for user_course in user_courses]
         all_user_courses = UserCourse.objects.filter(user_id__in=user_ids)
 
-        # 取出所有课程id
         course_ids = [user_course.course.id for user_course in all_user_courses]
-        # 获取学习过该课程的用户学习过其它所有的课程
         relate_courses = Course.objects.filter(id__in=course_ids).order_by("-click_nums")[:5]
         course_resources = CourseResource.objects.filter(course=course)
         return render(request, 'course-video.html', {

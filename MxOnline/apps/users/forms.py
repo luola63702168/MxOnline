@@ -7,7 +7,7 @@ from users.models import UserProfile
 
 class LoginFrom(forms.Form):
     '''登录表单'''
-    username = forms.CharField(required=True)  # required=True 表示该字段必须要有
+    username = forms.CharField(required=True)
     password = forms.CharField(required=True, min_length=5)
 
 
@@ -15,7 +15,6 @@ class RegisterForm(forms.Form):
     '''注册表单'''
     email = forms.EmailField(required=True)
     password = forms.CharField(required=True, min_length=5)
-    # error_messages 可以自定义错误，如果不自定义的话，默认是“认证没错误”,可以参考下面这段源码
     # raise ValidationError(getattr(self, 'error_messages', {}).get('invalid', ugettext_lazy('Invalid CAPTCHA')))
     captcha = CaptchaField(error_messages={"invalid": "验证码错误"})
 
@@ -42,9 +41,7 @@ class UploadImageForm(forms.ModelForm):
 
 class UserInfoForm(forms.ModelForm):
     """用户个人信息页(保存)"""
+
     class Meta:
         model = UserProfile
         fields = ['nick_name', 'gender', 'birday', 'address', 'mobile']
-
-
-# ModelForm 和 Form的区别，前者只可以校验，后者不仅可以校验，还可以修改。

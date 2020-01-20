@@ -4,9 +4,29 @@
     <list default="true" id="c710b956-f7a8-4561-bb5a-125546f63bd2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MxOnline/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/MxOnline/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MxOnline/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/MxOnline/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/courses/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/courses/adminx.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/courses/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/courses/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/courses/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/courses/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/operation/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/operation/adminx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/operation/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/operation/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/organization/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/organization/adminx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/organization/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/organization/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/organization/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/organization/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/organization/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/organization/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/adminx.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/adminx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/utils/email_send.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/utils/email_send.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/utils/mixin_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/utils/mixin_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/demo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/olddemo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,6 +210,7 @@
       <workItem from="1579429085649" duration="15737000" />
       <workItem from="1579502960356" duration="1754000" />
       <workItem from="1579506539024" duration="8239000" />
+      <workItem from="1579517588737" duration="1945000" />
     </task>
     <servers />
   </component>
@@ -254,11 +275,11 @@
       <screen x="3840" y="0" width="2560" height="1440" />
     </state>
     <state x="4552" y="422" key="SettingsEditor/0.0.1920.1080/3840.0.2560.1440@3840.0.2560.1440" timestamp="1579244875934" />
-    <state x="4585" y="655" key="com.intellij.ide.util.TipDialog" timestamp="1579506549159">
+    <state x="4585" y="655" key="com.intellij.ide.util.TipDialog" timestamp="1579517608551">
       <screen x="3840" y="0" width="2560" height="1440" />
     </state>
     <state x="559" y="491" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/3840.0.2560.1440@0.0.1920.1080" timestamp="1579502991198" />
-    <state x="4585" y="655" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/3840.0.2560.1440@3840.0.2560.1440" timestamp="1579506549159" />
+    <state x="4585" y="655" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/3840.0.2560.1440@3840.0.2560.1440" timestamp="1579517608551" />
     <state x="4872" y="219" width="607" height="804" key="find.popup" timestamp="1579445115354">
       <screen x="3840" y="0" width="2560" height="1440" />
     </state>

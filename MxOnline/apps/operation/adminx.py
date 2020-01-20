@@ -1,7 +1,7 @@
 # coding: utf-8
 import xadmin
 
-from operation.models import UserAsk,UserCourse,UserMessage,CourseComments,UserFavorite
+from operation.models import UserAsk, UserCourse, UserMessage, CourseComments, UserFavorite
 
 
 class UserAskAdmin(object):
@@ -34,20 +34,8 @@ class UserFavoriteAdmin(object):
     list_filter = ['user', 'fav_id', 'fav_type', 'add_time']
 
 
-xadmin.site.register(UserAsk,UserAskAdmin)
-xadmin.site.register(UserCourse,UserCourseAdmin)
-xadmin.site.register(UserMessage,UserMessageAdmin)
-xadmin.site.register(CourseComments,CourseCommentsAdmin)
-xadmin.site.register(UserFavorite,UserFavoriteAdmin)
-
-
-
-
-
-
-
-
-
-
-
-
+xadmin.site.register(UserAsk, UserAskAdmin)
+xadmin.site.register(UserCourse, UserCourseAdmin)
+xadmin.site.register(UserMessage, UserMessageAdmin)
+xadmin.site.register(CourseComments, CourseCommentsAdmin)
+xadmin.site.register(UserFavorite, UserFavoriteAdmin)

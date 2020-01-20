@@ -93,7 +93,6 @@ class OrgHomeView(View):
 
         has_fav = False
         if request.user.is_authenticated:
-            # 这里是收藏的判断所以fav_type肯定是2
             if UserFavorite.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):
                 has_fav = True
 
@@ -118,7 +117,6 @@ class OrgCourseView(View):
         course_org = CourseOrg.objects.get(id=int(org_id))
         has_fav = False
         if request.user.is_authenticated:
-            # 这里是收藏的判断所以fav_type肯定是2
             if UserFavorite.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):
                 has_fav = True
         all_courses = Course.objects.filter(course_org=course_org)
@@ -138,7 +136,6 @@ class OrgDescView(View):
         course_org = CourseOrg.objects.get(id=int(org_id))
         has_fav = False
         if request.user.is_authenticated:
-            # 这里是收藏的判断所以fav_type肯定是2
             if UserFavorite.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):
                 has_fav = True
         all_courses = Course.objects.filter(course_org=course_org)
@@ -158,7 +155,6 @@ class OrgTeacherView(View):
         course_org = CourseOrg.objects.get(id=int(org_id))
         has_fav = False
         if request.user.is_authenticated:
-            # 这里是收藏的判断所以fav_type肯定是2
             if UserFavorite.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):
                 has_fav = True
         all_teachers = Teacher.objects.filter(org=course_org)
@@ -202,15 +198,12 @@ class AddFavView(View):
             fav_type = int(request.POST.get('fav_type', 0))
         except Exception as e:
             return HttpResponse('{"status":"fail","msg":"非法请求"}', content_type='application/json')
-        # 判断登录状态
         if not request.user.is_authenticated:
             return HttpResponse('{"status":"fail","msg":"用户未登录"}', content_type='application/json')
 
-        # 这里测试fav_id 为int和str均没有关系
         exist_records = UserFavorite.objects.filter(user=request.user, fav_id=fav_id, fav_type=fav_type)
 
         if exist_records:
-            # 用户想取消收藏了
             exist_records.delete()
             self.set_fav_nums(fav_type, fav_id, -1)
             return HttpResponse('{"status":"success","msg":"收藏"}', content_type='application/json')
