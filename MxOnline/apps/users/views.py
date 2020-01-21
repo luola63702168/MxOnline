@@ -1,13 +1,13 @@
 import json
 
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout  # 验证账户密码
-from django.contrib.auth.backends import ModelBackend  # 改变authenticate验证模式
+from django.contrib.auth import authenticate, login, logout  
+from django.contrib.auth.backends import ModelBackend  
 from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.urls import reverse
 from django.db.models import Q
 from django.views.generic.base import View
-from django.contrib.auth.hashers import make_password  # 加密密码
+from django.contrib.auth.hashers import make_password  
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 from users.models import UserProfile, EmailVerifyRecord,Banner
