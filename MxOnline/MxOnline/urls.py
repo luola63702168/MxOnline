@@ -50,3 +50,4 @@ urlpatterns = [
 # 全局 404 页面配置
 handler404 = 'users.views.page_not_found'
 handler500 = 'users.views.page_error'
+
