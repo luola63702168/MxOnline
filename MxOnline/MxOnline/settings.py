@@ -188,3 +188,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #
 #     'SHOW_FIRST_PAGE_WHEN_INVALID': True,　#  参数为无效页的时候显示第一页
 # }
+
