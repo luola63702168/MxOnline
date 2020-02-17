@@ -171,3 +171,4 @@ class VideoPlayView(LoginRequiredMixin, View):
             'relate_courses': relate_courses,
             'video': video,
         })
+
